@@ -1,6 +1,6 @@
-// Type definitions for apicache 1.6
-// Project: https://github.com/kwhitley/apicache
-// Definitions by: Daniel Sogl <https://github.com/danielsogl>
+// Type definitions for apicache-plus 2.3.1
+// Project: https://github.com/arthurfranca/apicache-plus
+// Definitions by: Auke Bruinsma <https://github.com/air2>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 import { RedisClient } from 'redis';
@@ -68,8 +68,10 @@ export interface Options {
    * if provided, uses the [node-redis](https://github.com/NodeRedis/node_redis) client instead of [memory-cache](https://github.com/ptarjan/node-cache)
    */
   redisClient?: RedisClient | undefined;
-  /** appendKey takes the req/res objects and returns a custom value to extend the cache key */
-  appendKey?: any;
+  /** append takes the req/res objects and returns a custom value to extend the cache key */
+  append?: (req: any, res: any) => void;
+  /** change cache key name by altering the parts that make up key name (parts is an object auto-populated like this: { method: 'GET', url: '/api/test', params: { sort: 'desc', page: 2 }, appendice: 'userid-123-abc' }). For instance, if you want to cache with same key all requests to a specific route no matter the method (GET, POST etc): function(req, res, parts) { parts.method = ''; return parts } */
+  interceptKeyParts: (req: any, res: any, parts: any) => void | undefined,   
   /** list of headers that should never be cached */
   headerBlacklist?: string[] | undefined;
   statusCodes?: {
