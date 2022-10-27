@@ -71,7 +71,7 @@ export interface Options {
   /** append takes the req/res objects and returns a custom value to extend the cache key */
   append?: (req: any, res: any) => void;
   /** change cache key name by altering the parts that make up key name (parts is an object auto-populated like this: { method: 'GET', url: '/api/test', params: { sort: 'desc', page: 2 }, appendice: 'userid-123-abc' }). For instance, if you want to cache with same key all requests to a specific route no matter the method (GET, POST etc): function(req, res, parts) { parts.method = ''; return parts } */
-  interceptKeyParts: (req: any, res: any, parts: any) => void | undefined,   
+  interceptKeyParts?: (req: any, res: any, parts: any) => void | undefined,   
   /** list of headers that should never be cached */
   headerBlacklist?: string[] | undefined;
   statusCodes?: {
