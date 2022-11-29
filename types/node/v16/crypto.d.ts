@@ -3037,7 +3037,7 @@ declare module 'crypto' {
         /**
          * @default 'always'
          */
-        subject: 'always' | 'never';
+        subject: 'always' | 'default' | 'never';
         /**
          * @default true
          */
